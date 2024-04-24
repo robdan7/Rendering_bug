@@ -71,6 +71,9 @@ public class CustomRenderPassFeature : ScriptableRendererFeature
     // This method is called when setting up the renderer once per-camera.
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
+#if UNITY_EDITOR
+        if (renderingData.cameraData.isSceneViewCamera) return;
+#endif
         renderer.EnqueuePass(m_ScriptablePass);
     }
 }
